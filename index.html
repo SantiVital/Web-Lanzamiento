@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Performance Platform — Football performance & medical, unified</title>
+<meta name="description" content="Squad management, GPS, injury control, rehab and reporting — one platform, built with sport science.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b16; --bg2:#0a1020; --ink:#eaeefb; --muted:#9aa6c4; --soft:#6f7b9c;
+    --line:rgba(255,255,255,.09); --card:rgba(255,255,255,.045); --card2:rgba(255,255,255,.03);
+    --b1:#3b82f6; --b2:#22d3ee; --accent:#f59e0b; --good:#22c55e;
+    --grad:linear-gradient(120deg,#3b82f6,#22d3ee 60%,#7c5cff);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#8fb3ff}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:13px 22px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.18s;white-space:nowrap}
+  .btn-primary{background:var(--grad);color:#04122b}
+  .btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{background:rgba(255,255,255,.09)}
+  /* glow backdrop */
+  .glow{position:absolute;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none}
+  /* ===== NAV ===== */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,22,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:20px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px}
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#04122b;font-weight:900;font-size:17px;box-shadow:0 6px 18px rgba(59,130,246,.35)}
+  .nav-links{display:flex;gap:26px;margin-left:14px}
+  .nav-links a{font-size:14.5px;color:var(--muted);font-weight:600}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .lang{display:flex;gap:2px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:3px}
+  .lang button{border:none;background:transparent;color:var(--muted);font-weight:700;font-size:12px;padding:5px 9px;border-radius:7px;cursor:pointer}
+  .lang button.on{background:var(--grad);color:#04122b}
+  @media(max-width:860px){.nav-links{display:none}}
+  /* ===== HERO ===== */
+  .hero{position:relative;padding:76px 0 40px;overflow:hidden}
+  .hero .glow.g1{width:520px;height:520px;background:#3b82f6;top:-160px;left:-120px}
+  .hero .glow.g2{width:460px;height:460px;background:#7c5cff;top:-80px;right:-120px;opacity:.4}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(34px,5vw,58px);line-height:1.05;font-weight:900;letter-spacing:-.02em;margin:16px 0 0}
+  .hero p.lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);margin:18px 0 26px;max-width:560px;line-height:1.6}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-note{margin-top:16px;font-size:12.5px;color:var(--soft)}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px}}
+  /* app mockup */
+  .device{position:relative;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,#0e1730,#0a1020);box-shadow:0 40px 90px rgba(0,0,0,.55);overflow:hidden}
+  .device-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .device-bar i{width:10px;height:10px;border-radius:50%;background:#33405f;display:inline-block}
+  .dash{display:grid;grid-template-columns:52px 1fr;min-height:330px}
+  .dash-side{border-right:1px solid var(--line);padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:14px;background:rgba(255,255,255,.015)}
+  .dash-side b{width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.08)}
+  .dash-side b.act{background:var(--grad)}
+  .dash-main{padding:14px}
+  .dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 10px}
+  .kpi small{font-size:8px;letter-spacing:.08em;color:var(--soft);text-transform:uppercase;font-weight:800}
+  .kpi b{display:block;font-size:19px;font-weight:900;margin-top:2px}
+  .dash-chart{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .dash-chart .ttl{font-size:9px;letter-spacing:.06em;color:var(--soft);text-transform:uppercase;font-weight:800;margin-bottom:8px}
+  .vbars{display:flex;align-items:flex-end;gap:7px;height:96px}
+  .vbars i{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#3b82f6,#22d3ee);opacity:.85}
+  .vbars i.gold{background:linear-gradient(180deg,#f7b955,#e5822e)}
+  .float{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;backdrop-filter:blur(8px);box-shadow:0 16px 40px rgba(0,0,0,.45);font-size:12px;font-weight:700}
+  .float .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  /* ===== STATS ===== */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}
+  .stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:26px 0}
+  .stat b{font-size:clamp(26px,3.4vw,38px);font-weight:900;display:block}
+  .stat span{font-size:13px;color:var(--muted);font-weight:600}
+  @media(max-width:720px){.stats-in{grid-template-columns:repeat(2,1fr);gap:22px}}
+  /* ===== SECTIONS ===== */
+  section.blk{padding:74px 0;position:relative}
+  .sec-head{max-width:640px;margin:0 auto 44px;text-align:center}
+  .sec-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;letter-spacing:-.02em;margin:12px 0 10px}
+  .sec-head p{color:var(--muted);font-size:16px;line-height:1.6}
+  /* capability rows (scrollytelling) */
+  .cap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:64px}
+  .cap:nth-child(even) .cap-media{order:-1}
+  .cap-ic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .cap-ic svg{width:24px;height:24px;stroke:url(#g);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .cap h3{font-size:24px;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
+  .cap p{color:var(--muted);font-size:15.5px;line-height:1.65;margin:0 0 14px}
+  .cap ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cap ul li{font-size:12.5px;font-weight:600;color:#c7d2ee;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:6px 12px}
+  .cap-media{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-height:230px;position:relative;overflow:hidden}
+  @media(max-width:820px){.cap{grid-template-columns:1fr;gap:22px}.cap:nth-child(even) .cap-media{order:0}}
+  /* media inner visuals */
+  .m-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .m-row:last-child{border-bottom:none}
+  .m-av{width:30px;height:30px;border-radius:8px;background:var(--grad);flex:0 0 auto}
+  .m-bar{flex:1;height:8px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+  .m-bar i{display:block;height:100%;background:var(--grad);border-radius:5px}
+  .m-tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px}
+  .ccc{display:flex;gap:6px;margin-top:8px}
+  .ccc i{flex:1;height:9px;border-radius:5px;opacity:.4}
+  .ccc i.on{opacity:1;height:13px}
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .step .n{width:40px;height:40px;border-radius:11px;background:var(--grad);color:#04122b;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px}
+  .step h4{margin:0 0 8px;font-size:18px}
+  .step p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  /* pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:840px;margin:0 auto}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;position:relative;display:flex;flex-direction:column}
+  .plan.pro{border-color:rgba(59,130,246,.5);background:linear-gradient(180deg,rgba(59,130,246,.10),var(--card2));box-shadow:0 30px 70px rgba(59,130,246,.14)}
+  .plan .ptag{position:absolute;top:-12px;right:22px;background:var(--grad);color:#04122b;font-size:11px;font-weight:900;letter-spacing:.05em;padding:5px 12px;border-radius:20px}
+  .plan h3{font-size:20px;margin:0 0 4px}
+  .plan .desc{color:var(--muted);font-size:13.5px;min-height:38px}
+  .plan .amt{font-size:40px;font-weight:900;margin:14px 0 2px;letter-spacing:-.02em}
+  .plan .amt small{font-size:14px;color:var(--muted);font-weight:600}
+  .plan .per{font-size:12.5px;color:var(--soft);margin-bottom:18px}
+  .plan ul{list-style:none;padding:0;margin:0 0 22px;flex:1}
+  .plan ul li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:#d4dcf2;padding:7px 0}
+  .plan ul li svg{width:18px;height:18px;flex:0 0 auto;margin-top:1px;stroke:#22d3ee;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .price-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:18px}
+  .price-note a{color:#8fb3ff;font-weight:700}
+  @media(max-width:700px){.price-grid{grid-template-columns:1fr}}
+  /* CTA + form */
+  .cta{position:relative;overflow:hidden;border-radius:24px;border:1px solid var(--line);background:linear-gradient(140deg,#0e1730,#0a1020);padding:40px}
+  .cta .glow{width:400px;height:400px;background:#3b82f6;top:-140px;right:-100px;opacity:.35}
+  .cta-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+  .cta h2{font-size:clamp(24px,3vw,34px);font-weight:900;margin:8px 0 12px;letter-spacing:-.02em}
+  .cta p{color:var(--muted);font-size:15.5px;line-height:1.6}
+  form .f{margin-bottom:12px}
+  form label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px;letter-spacing:.02em}
+  form input,form select,form textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:11px;padding:12px 13px;color:var(--ink);font-family:inherit;font-size:14px}
+  form input:focus,form select,form textarea:focus{outline:none;border-color:#3b82f6}
+  form .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  form textarea{min-height:78px;resize:vertical}
+  .form-ok{display:none;text-align:center;padding:26px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.35);border-radius:14px}
+  .form-ok.show{display:block}
+  @media(max-width:820px){.cta-grid{grid-template-columns:1fr;gap:22px}}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:13px}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs></svg>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="mark">P</span><span data-i18n="brand">Performance</span></a>
+    <nav class="nav-links">
+      <a href="#capabilities" data-i18n="nav_cap">Capabilities</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="#pricing" data-i18n="nav_price">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" id="lang">
+        <button data-l="en" class="on">EN</button>
+        <button data-l="es">ES</button>
+        <button data-l="pt">PT</button>
+      </div>
+      <a href="#demo" class="btn btn-primary" data-i18n="nav_cta">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow" data-i18n="hero_eyebrow">Football performance, unified</span>
+      <h1 data-i18n="hero_h1">The performance & medical platform for modern football clubs</h1>
+      <p class="lead" data-i18n="hero_lead">Squad management, GPS, injury control, rehabilitation and reporting — one place, built with sport science.</p>
+      <div class="hero-cta">
+        <a href="#demo" class="btn btn-primary" data-i18n="hero_cta1">Book a demo</a>
+        <a href="#demo" class="btn btn-ghost" data-i18n="hero_cta2">Sign up</a>
+      </div>
+      <div class="hero-note" data-i18n="hero_note">No install · works on any device · GDPR-ready · EN / ES / PT</div>
+    </div>
+    <div class="reveal in d1" style="position:relative">
+      <div class="device">
+        <div class="device-bar"><i></i><i></i><i></i></div>
+        <div class="dash">
+          <div class="dash-side"><b class="act"></b><b></b><b></b><b></b><b></b><b></b></div>
+          <div class="dash-main">
+            <div class="dash-kpis">
+              <div class="kpi"><small data-i18n="mk_load">Load</small><b>763<span style="font-size:11px;color:var(--muted)"> AU</span></b></div>
+              <div class="kpi"><small data-i18n="mk_hsr">HSR</small><b>642<span style="font-size:11px;color:var(--muted)"> m</span></b></div>
+              <div class="kpi"><small data-i18n="mk_avail">Available</small><b>21<span style="font-size:11px;color:var(--muted)">/24</span></b></div>
+            </div>
+            <div class="dash-chart">
+              <div class="ttl" data-i18n="mk_chart">Peak values · by athlete</div>
+              <div class="vbars"><i style="height:88%" class="gold"></i><i style="height:80%"></i><i style="height:72%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:40%"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float" style="top:-16px;left:-14px"><span class="dot" style="background:#22c55e"></span><span data-i18n="mf_ready">Readiness 92%</span></div>
+      <div class="float" style="bottom:14px;right:-16px"><span class="dot" style="background:#f59e0b"></span><span data-i18n="mf_rehab">Rehab · Control-Chaos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats"><div class="wrap stats-in">
+  <div class="stat reveal"><b><span class="count" data-to="6">0</span></b><span data-i18n="st_dep">departments in one platform</span></div>
+  <div class="stat reveal d1"><b><span class="count" data-to="15">0</span>+</b><span data-i18n="st_mod">modules & dashboards</span></div>
+  <div class="stat reveal d2"><b>3</b><span data-i18n="st_lang">languages built in</span></div>
+  <div class="stat reveal d3"><b>1</b><span data-i18n="st_src">source of truth for staff</span></div>
+</div></div>
+
+<!-- CAPABILITIES -->
+<section class="blk" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="cap_eyebrow">Capabilities</span>
+      <h2 data-i18n="cap_h2">Everything your performance & medical staff need</h2>
+      <p data-i18n="cap_sub">Six departments that usually live in spreadsheets and separate apps — connected, visual and decision-ready.</p>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.1"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.3a3 3 0 0 1 0 5.4"/><path d="M17.5 20a5.5 5.5 0 0 0-3-4.9"/></svg></div>
+        <h3 data-i18n="c1_h">Squad & Coaching</h3>
+        <p data-i18n="c1_p">Your whole squad by position, drag-and-drop line-ups, session plans and a mesocycle planner the whole staff shares.</p>
+        <ul><li data-i18n="c1_t1">My Team</li><li data-i18n="c1_t2">Line-ups</li><li data-i18n="c1_t3">Session plans</li><li data-i18n="c1_t4">Coach dashboard</li></ul>
+      </div>
+      <div class="cap-media">
+        <div class="m-row"><div class="m-av"></div><div class="m-bar"><i style="width:82%"></i></div><span class="m-tag" style="background:rgba(34,197,94,.16);color:#22c55e" data-i18n="c1_avail">Available</span></div>
+        <div class="m-row"><div class="m-av"></div><div class="m-bar"><i style="width:64%"></i></div><span class="m-tag" style="background:rgba(59,130,246,.16);color:#60a5fa" data-i18n="c1_train">Training</span></div>
+        <div class="m-row"><div class="m-av"></div><div class="m-bar"><i style="width:48%"></i></div><span class="m-tag" style="background:rgba(245,158,11,.16);color:#f59e0b" data-i18n="c1_mod">Modified</span></div>
+      </div>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M3 12h3.5l1.8-5 3.4 10 2-6 1.3 3H21"/></svg></div>
+        <h3 data-i18n="c2_h">Medical & Injury Control</h3>
+        <p data-i18n="c2_p">A living injury record with a 200+ diagnosis taxonomy, daily treatment, timeline and anamnesis — the medical memory of the club.</p>
+        <ul><li data-i18n="c2_t1">Injury Control</li><li data-i18n="c2_t2">Daily treatment</li><li data-i18n="c2_t3">Timeline</li><li data-i18n="c2_t4">Anamnesis</li></ul>
+      </div>
+      <div class="cap-media">
+        <div class="dash-kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><small data-i18n="c2_k1">Active</small><b style="color:#ef4444">1</b></div>
+          <div class="kpi"><small data-i18n="c2_k2">In rehab</small><b style="color:#0ea5e9">2</b></div>
+          <div class="kpi"><small data-i18n="c2_k3">Days out</small><b>34</b></div>
+        </div>
+        <div class="m-row"><div class="m-av" style="background:#ef4444"></div><div style="flex:1;font-size:12.5px"><b>Hamstring · structural</b><div style="color:var(--muted);font-size:11px" data-i18n="c2_left">Left · 34 days</div></div></div>
+      </div>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3.5V8h-4.5"/></svg></div>
+        <h3 data-i18n="c3_h">Rehab · Control-Chaos Continuum</h3>
+        <p data-i18n="c3_p">Evidence-based return-to-play: phase periodization, StARRT risk assessment, worst-case demands and return-to-load tracking (Taberner, Shrier).</p>
+        <ul><li data-i18n="c3_t1">5-phase framework</li><li data-i18n="c3_t2">StARRT</li><li data-i18n="c3_t3">Return to load</li><li data-i18n="c3_t4">RTP tests</li></ul>
+      </div>
+      <div class="cap-media">
+        <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em" data-i18n="c3_now">Control to Chaos · now</div>
+        <div class="ccc"><i style="background:#22c55e" class="on"></i><i style="background:#84cc16" class="on"></i><i style="background:#eab308" class="on"></i><i style="background:#f97316"></i><i style="background:#ef4444"></i></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--soft);margin-top:6px"><span>High Control</span><span>High Chaos</span></div>
+        <div style="margin-top:12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-left:3px solid #e5822e;border-radius:10px;padding:9px 11px;font-size:12px"><b data-i18n="c3_v">Rejoin at: Control to Chaos</b></div>
+      </div>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M5 18a10 10 0 0 1 14 0"/><path d="M8.3 15a5.6 5.6 0 0 1 7.4 0"/><circle cx="12" cy="18" r="1.3"/></svg></div>
+        <h3 data-i18n="c4_h">GPS & Performance</h3>
+        <p data-i18n="c4_p">Import any GPS export and get peak values, load management, and weekly variability & monotony — the numbers that rise before a problem.</p>
+        <ul><li data-i18n="c4_t1">GPS dashboard</li><li data-i18n="c4_t2">Peak values</li><li data-i18n="c4_t3">Variability</li><li data-i18n="c4_t4">Monotony & strain</li></ul>
+      </div>
+      <div class="cap-media">
+        <div class="vbars" style="height:120px"><i style="height:90%" class="gold"></i><i style="height:78%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:52%"></i><i style="height:44%"></i></div>
+        <div style="text-align:right;font-size:10.5px;color:var(--soft);margin-top:7px" data-i18n="c4_leg">Leader in gold · scaled to squad peak</div>
+      </div>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.4 3.9 8 8 0 1 0 20 14.5Z"/></svg></div>
+        <h3 data-i18n="c5_h">Wellness & Readiness</h3>
+        <p data-i18n="c5_p">A 30-second daily check-in players fill from their phone — sleep, fatigue, soreness, stress, mood — flagged and turned into availability.</p>
+        <ul><li data-i18n="c5_t1">Daily check-in</li><li data-i18n="c5_t2">Player kiosk</li><li data-i18n="c5_t3">Readiness</li><li data-i18n="c5_t4">Availability</li></ul>
+      </div>
+      <div class="cap-media">
+        <div class="m-row"><div class="m-av"></div><div style="flex:1;font-size:12.5px"><b>Ilhan F.</b></div><span class="m-tag" style="background:rgba(34,197,94,.16);color:#22c55e">92%</span></div>
+        <div class="m-row"><div class="m-av"></div><div style="flex:1;font-size:12.5px"><b>Caleb L.</b></div><span class="m-tag" style="background:rgba(245,158,11,.16);color:#f59e0b">74%</span></div>
+        <div class="m-row"><div class="m-av"></div><div style="flex:1;font-size:12.5px"><b>Aqil Y.</b></div><span class="m-tag" style="background:rgba(34,197,94,.16);color:#22c55e">88%</span></div>
+      </div>
+    </div>
+
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></div>
+        <h3 data-i18n="c6_h">Reports staff & players love</h3>
+        <p data-i18n="c6_p">Premium individual and match reports, shareable to players by WhatsApp or PDF in one tap, plus season statistics for the staff.</p>
+        <ul><li data-i18n="c6_t1">Individual reports</li><li data-i18n="c6_t2">Match reports</li><li data-i18n="c6_t3">WhatsApp / PDF</li><li data-i18n="c6_t4">Statistics</li></ul>
+      </div>
+      <div class="cap-media" style="display:flex;align-items:center;justify-content:center">
+        <div style="width:170px;border-radius:12px;overflow:hidden;border:1px solid var(--line)">
+          <div style="background:linear-gradient(135deg,#141d54,#232a86);padding:12px;color:#fff"><div style="font-size:9px;letter-spacing:.1em;color:#b9c2e6;font-weight:800">MATCH REPORT</div><div style="font-size:15px;font-weight:900;margin-top:3px">Ilhan Fandi</div><div style="font-size:10px;color:#c3cbe8">82′ · 2G · 1A</div></div>
+          <div style="background:#0b1a34;padding:10px;display:flex;gap:6px;align-items:flex-end;height:56px">
+            <i style="flex:1;height:80%;background:linear-gradient(180deg,#38bdf8,#22c55e);border-radius:3px"></i><i style="flex:1;height:60%;background:#64748b;border-radius:3px"></i><i style="flex:1;height:70%;background:linear-gradient(180deg,#38bdf8,#22c55e);border-radius:3px"></i><i style="flex:1;height:50%;background:#64748b;border-radius:3px"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="blk" id="how" style="background:rgba(255,255,255,.015);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow" data-i18n="how_eyebrow">How it works</span><h2 data-i18n="how_h2">Live in days, not months</h2><p data-i18n="how_sub">No IT project. Your staff is up and running the same week.</p></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">1</div><h4 data-i18n="s1_h">Bring in your squad</h4><p data-i18n="s1_p">Add your teams and players, or import them. Set staff roles and access in minutes.</p></div>
+      <div class="step reveal d1"><div class="n">2</div><h4 data-i18n="s2_h">Track every day</h4><p data-i18n="s2_p">Wellness, availability, GPS, treatments and rehab flow in from staff and players' phones.</p></div>
+      <div class="step reveal d2"><div class="n">3</div><h4 data-i18n="s3_h">Decide with data</h4><p data-i18n="s3_p">Readiness, load, injury risk and return-to-play — visual and ready for the next session.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="blk" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow" data-i18n="pr_eyebrow">Pricing</span><h2 data-i18n="pr_h2">Simple, per team</h2><p data-i18n="pr_sub">Start with the essentials, or unlock the full performance & medical suite.</p></div>
+    <div class="price-grid">
+      <div class="plan reveal">
+        <h3>Basic</h3>
+        <div class="desc" data-i18n="pl_b_d">Squad & medical essentials for a single team or academy.</div>
+        <div class="amt">€79<small> <span data-i18n="pl_per">/ team / month</span></small></div>
+        <div class="per" data-i18n="pl_b_bill">Billed annually · or €99 monthly</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b1">My Team, line-ups & squad board</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b2">Daily wellness & availability</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b3">Injury Control & daily treatment</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b4">Match records & basic reports</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b5">Up to 8 staff seats · EN/ES/PT</span></li>
+        </ul>
+        <a href="#demo" class="btn btn-ghost" style="justify-content:center" data-i18n="pl_b_cta">Start with Basic</a>
+      </div>
+      <div class="plan pro reveal d1">
+        <span class="ptag" data-i18n="pl_pop">Most popular</span>
+        <h3>Pro</h3>
+        <div class="desc" data-i18n="pl_p_d">The full performance & medical suite for clubs that live on data.</div>
+        <div class="amt">€199<small> <span data-i18n="pl_per">/ team / month</span></small></div>
+        <div class="per" data-i18n="pl_p_bill">Billed annually · or €249 monthly</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p1"><b>Everything in Basic</b>, plus:</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p2">GPS dashboard, peak values, variability</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p3">Rehab · Control-Chaos + StARRT</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p4">Tests (ForceFrame, Y-Balance, LSI)</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p5">Session plans & mesocycle planner</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p6">Premium reports · WhatsApp/PDF · multi-team</span></li>
+        </ul>
+        <a href="#demo" class="btn btn-primary" style="justify-content:center" data-i18n="pl_p_cta">Get Pro</a>
+      </div>
+    </div>
+    <div class="price-note reveal" data-i18n="pr_note">Managing several teams or a whole club? <a href="#demo">Talk to us</a> about multi-club pricing.</div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="blk" id="demo">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div class="glow"></div>
+      <div class="cta-grid">
+        <div>
+          <span class="eyebrow" data-i18n="cta_eyebrow">Book a meeting</span>
+          <h2 data-i18n="cta_h2">See it with your own squad</h2>
+          <p data-i18n="cta_p">Tell us about your club and we'll set up a 30-minute demo — and get you into a trial. We usually reply within one business day.</p>
+          <div style="margin-top:16px;font-size:13px;color:var(--soft)" data-i18n="cta_small">Prefer email? hello@yourdomain.com</div>
+        </div>
+        <div>
+          <form name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="demoForm">
+            <input type="hidden" name="form-name" value="demo">
+            <p hidden><label>Don't fill: <input name="bot-field"></label></p>
+            <div class="row2">
+              <div class="f"><label data-i18n="lb_name">Name</label><input name="name" required></div>
+              <div class="f"><label data-i18n="lb_club">Club / organisation</label><input name="club" required></div>
+            </div>
+            <div class="row2">
+              <div class="f"><label data-i18n="lb_email">Email</label><input type="email" name="email" required></div>
+              <div class="f"><label data-i18n="lb_role">Role</label><input name="role" placeholder="e.g. Head of Performance"></div>
+            </div>
+            <div class="f"><label data-i18n="lb_msg">What do you want to improve?</label><textarea name="message"></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" data-i18n="lb_send">Request my demo</button>
+          </form>
+          <div class="form-ok" id="formOk"><b style="font-size:16px" data-i18n="ok_h">✓ Thanks — request received</b><div style="color:var(--muted);font-size:13.5px;margin-top:6px" data-i18n="ok_p">We'll be in touch within one business day.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="brand"><span class="mark">P</span><span data-i18n="brand">Performance</span></div>
+    <div data-i18n="foot_c">© 2026 Performance Platform · Built with sport science · EN / ES / PT</div>
+  </div>
+</footer>
+
+<script>
+/* ===== i18n ===== */
+const I18N={
+ en:{}, /* HTML defaults are English; en is filled from DOM on load */
+ es:{
+  brand:"Performance", nav_cap:"Capacidades", nav_how:"Cómo funciona", nav_price:"Precios", nav_cta:"Reservar demo",
+  hero_eyebrow:"Rendimiento futbolístico, unificado", hero_h1:"La plataforma de rendimiento y médica para clubes de fútbol modernos",
+  hero_lead:"Gestión de plantilla, GPS, control de lesiones, rehabilitación e informes — en un solo sitio, con base en la ciencia del deporte.",
+  hero_cta1:"Reservar demo", hero_cta2:"Crear cuenta", hero_note:"Sin instalar · en cualquier dispositivo · lista para RGPD · EN / ES / PT",
+  mk_load:"Carga", mk_hsr:"HSR", mk_avail:"Disponibles", mk_chart:"Valores máximos · por atleta", mf_ready:"Readiness 92%", mf_rehab:"Rehab · Control-Chaos",
+  st_dep:"departamentos en una plataforma", st_mod:"módulos y paneles", st_lang:"idiomas integrados", st_src:"única fuente de verdad para el staff",
+  cap_eyebrow:"Capacidades", cap_h2:"Todo lo que tu staff de rendimiento y médico necesita", cap_sub:"Seis departamentos que suelen vivir en hojas de cálculo y apps sueltas — conectados, visuales y listos para decidir.",
+  c1_h:"Plantilla y cuerpo técnico", c1_p:"Toda tu plantilla por posición, alineaciones drag-and-drop, planes de sesión y un planificador de mesociclos que comparte todo el staff.", c1_t1:"Mi Equipo", c1_t2:"Alineaciones", c1_t3:"Planes de sesión", c1_t4:"Panel del entrenador", c1_avail:"Disponible", c1_train:"Entreno", c1_mod:"Modificado",
+  c2_h:"Médico y Control de Lesiones", c2_p:"Un historial de lesiones vivo con taxonomía de +200 diagnósticos, tratamiento diario, cronología y anamnesis — la memoria médica del club.", c2_t1:"Control de lesiones", c2_t2:"Tratamiento diario", c2_t3:"Cronología", c2_t4:"Anamnesis", c2_k1:"Activas", c2_k2:"En rehab", c2_k3:"Días baja", c2_left:"Izquierda · 34 días",
+  c3_h:"Rehab · Control-Chaos Continuum", c3_p:"Return-to-play con evidencia: periodización por fases, evaluación de riesgo StARRT, demandas worst-case y control de retorno a la carga (Taberner, Shrier).", c3_t1:"Marco de 5 fases", c3_t2:"StARRT", c3_t3:"Retorno a la carga", c3_t4:"Tests RTP", c3_now:"Control to Chaos · ahora", c3_v:"Reincorporar en: Control to Chaos",
+  c4_h:"GPS y Rendimiento", c4_p:"Importa cualquier export de GPS y obtén valores máximos, gestión de carga y variabilidad y monotonía semanal — los números que suben antes del problema.", c4_t1:"Panel GPS", c4_t2:"Valores máximos", c4_t3:"Variabilidad", c4_t4:"Monotonía y strain", c4_leg:"Líder en dorado · escalado al pico del equipo",
+  c5_h:"Wellness y Readiness", c5_p:"Un check-in diario de 30 segundos que el jugador rellena desde el móvil — sueño, fatiga, dolor, estrés, ánimo — marcado y convertido en disponibilidad.", c5_t1:"Check-in diario", c5_t2:"Kiosco jugador", c5_t3:"Readiness", c5_t4:"Disponibilidad",
+  c6_h:"Informes que encantan a staff y jugadores", c6_p:"Informes individuales y de partido premium, para compartir al jugador por WhatsApp o PDF en un toque, más estadísticas de temporada para el staff.", c6_t1:"Informes individuales", c6_t2:"Informes de partido", c6_t3:"WhatsApp / PDF", c6_t4:"Estadísticas",
+  how_eyebrow:"Cómo funciona", how_h2:"En marcha en días, no meses", how_sub:"Sin proyecto de IT. Tu staff empieza a usarlo la misma semana.",
+  s1_h:"Sube tu plantilla", s1_p:"Añade equipos y jugadores, o impórtalos. Define roles y accesos del staff en minutos.",
+  s2_h:"Registra cada día", s2_p:"Wellness, disponibilidad, GPS, tratamientos y rehab entran desde el staff y los móviles de los jugadores.",
+  s3_h:"Decide con datos", s3_p:"Readiness, carga, riesgo de lesión y return-to-play — visual y listo para la siguiente sesión.",
+  pr_eyebrow:"Precios", pr_h2:"Simple, por equipo", pr_sub:"Empieza con lo esencial, o desbloquea toda la suite de rendimiento y médica.",
+  pl_per:"/ equipo / mes", pl_pop:"Más popular",
+  pl_b_d:"Lo esencial de plantilla y médico para un equipo o academia.", pl_b_bill:"Facturación anual · o €99 al mes",
+  pl_b1:"Mi Equipo, alineaciones y squad board", pl_b2:"Wellness diario y disponibilidad", pl_b3:"Control de lesiones y tratamiento diario", pl_b4:"Registro de partidos e informes básicos", pl_b5:"Hasta 8 usuarios del staff · EN/ES/PT", pl_b_cta:"Empezar con Basic",
+  pl_p_d:"La suite completa de rendimiento y médica para clubes que viven de los datos.", pl_p_bill:"Facturación anual · o €249 al mes",
+  pl_p1:"<b>Todo lo de Basic</b>, y además:", pl_p2:"Panel GPS, valores máximos, variabilidad", pl_p3:"Rehab · Control-Chaos + StARRT", pl_p4:"Tests (ForceFrame, Y-Balance, LSI)", pl_p5:"Planes de sesión y mesociclos", pl_p6:"Informes premium · WhatsApp/PDF · multi-equipo", pl_p_cta:"Contratar Pro",
+  pr_note:"¿Varios equipos o un club entero? <a href='#demo'>Habla con nosotros</a> sobre precio multi-club.",
+  cta_eyebrow:"Reservar reunión", cta_h2:"Míralo con tu propia plantilla", cta_p:"Cuéntanos sobre tu club y montamos una demo de 30 minutos — y te damos acceso a una prueba. Solemos responder en un día laborable.", cta_small:"¿Prefieres email? hola@tudominio.com",
+  lb_name:"Nombre", lb_club:"Club / organización", lb_email:"Email", lb_role:"Rol", lb_msg:"¿Qué quieres mejorar?", lb_send:"Solicitar mi demo",
+  ok_h:"✓ Gracias — solicitud recibida", ok_p:"Te contactamos en un día laborable.", foot_c:"© 2026 Performance Platform · Con base en la ciencia del deporte · EN / ES / PT"
+ },
+ pt:{
+  brand:"Performance", nav_cap:"Capacidades", nav_how:"Como funciona", nav_price:"Preços", nav_cta:"Marcar demo",
+  hero_eyebrow:"Desempenho no futebol, unificado", hero_h1:"A plataforma de desempenho e médica para clubes de futebol modernos",
+  hero_lead:"Gestão de plantel, GPS, controlo de lesões, reabilitação e relatórios — num só lugar, com base na ciência do desporto.",
+  hero_cta1:"Marcar demo", hero_cta2:"Criar conta", hero_note:"Sem instalar · em qualquer dispositivo · pronta para RGPD · EN / ES / PT",
+  mk_load:"Carga", mk_hsr:"HSR", mk_avail:"Disponíveis", mk_chart:"Valores máximos · por atleta", mf_ready:"Readiness 92%", mf_rehab:"Reab · Control-Chaos",
+  st_dep:"departamentos numa plataforma", st_mod:"módulos e painéis", st_lang:"idiomas integrados", st_src:"única fonte de verdade para o staff",
+  cap_eyebrow:"Capacidades", cap_h2:"Tudo o que o teu staff de desempenho e médico precisa", cap_sub:"Seis departamentos que costumam viver em folhas de cálculo e apps soltas — ligados, visuais e prontos para decidir.",
+  c1_h:"Plantel e Treino", c1_p:"Todo o plantel por posição, onzes drag-and-drop, planos de sessão e um planeador de mesociclos partilhado por todo o staff.", c1_t1:"Minha Equipa", c1_t2:"Onzes", c1_t3:"Planos de sessão", c1_t4:"Painel do treinador", c1_avail:"Disponível", c1_train:"Treino", c1_mod:"Modificado",
+  c2_h:"Médico e Controlo de Lesões", c2_p:"Um histórico de lesões vivo com taxonomia de +200 diagnósticos, tratamento diário, cronologia e anamnese — a memória médica do clube.", c2_t1:"Controlo de lesões", c2_t2:"Tratamento diário", c2_t3:"Cronologia", c2_t4:"Anamnese", c2_k1:"Ativas", c2_k2:"Em reab", c2_k3:"Dias fora", c2_left:"Esquerda · 34 dias",
+  c3_h:"Reab · Control-Chaos Continuum", c3_p:"Return-to-play com evidência: periodização por fases, avaliação de risco StARRT, exigências worst-case e controlo de retorno à carga (Taberner, Shrier).", c3_t1:"Modelo de 5 fases", c3_t2:"StARRT", c3_t3:"Retorno à carga", c3_t4:"Testes RTP", c3_now:"Control to Chaos · agora", c3_v:"Reintegrar em: Control to Chaos",
+  c4_h:"GPS e Desempenho", c4_p:"Importa qualquer export de GPS e obtém valores máximos, gestão de carga e variabilidade e monotonia semanal — os números que sobem antes do problema.", c4_t1:"Painel GPS", c4_t2:"Valores máximos", c4_t3:"Variabilidade", c4_t4:"Monotonia e strain", c4_leg:"Líder a dourado · escalado ao pico da equipa",
+  c5_h:"Wellness e Readiness", c5_p:"Um check-in diário de 30 segundos que o jogador preenche do telemóvel — sono, fadiga, dores, stress, humor — sinalizado e convertido em disponibilidade.", c5_t1:"Check-in diário", c5_t2:"Quiosque jogador", c5_t3:"Readiness", c5_t4:"Disponibilidade",
+  c6_h:"Relatórios que staff e jogadores adoram", c6_p:"Relatórios individuais e de jogo premium, para partilhar ao jogador por WhatsApp ou PDF num toque, mais estatísticas de época para o staff.", c6_t1:"Relatórios individuais", c6_t2:"Relatórios de jogo", c6_t3:"WhatsApp / PDF", c6_t4:"Estatísticas",
+  how_eyebrow:"Como funciona", how_h2:"A funcionar em dias, não meses", how_sub:"Sem projeto de IT. O teu staff começa a usar na mesma semana.",
+  s1_h:"Traz o teu plantel", s1_p:"Adiciona equipas e jogadores, ou importa-os. Define papéis e acessos do staff em minutos.",
+  s2_h:"Regista todos os dias", s2_p:"Wellness, disponibilidade, GPS, tratamentos e reab entram do staff e dos telemóveis dos jogadores.",
+  s3_h:"Decide com dados", s3_p:"Readiness, carga, risco de lesão e return-to-play — visual e pronto para a próxima sessão.",
+  pr_eyebrow:"Preços", pr_h2:"Simples, por equipa", pr_sub:"Começa com o essencial, ou desbloqueia toda a suite de desempenho e médica.",
+  pl_per:"/ equipa / mês", pl_pop:"Mais popular",
+  pl_b_d:"O essencial de plantel e médico para uma equipa ou academia.", pl_b_bill:"Faturação anual · ou €99 por mês",
+  pl_b1:"Minha Equipa, onzes e squad board", pl_b2:"Wellness diário e disponibilidade", pl_b3:"Controlo de lesões e tratamento diário", pl_b4:"Registo de jogos e relatórios básicos", pl_b5:"Até 8 utilizadores do staff · EN/ES/PT", pl_b_cta:"Começar com Basic",
+  pl_p_d:"A suite completa de desempenho e médica para clubes que vivem de dados.", pl_p_bill:"Faturação anual · ou €249 por mês",
+  pl_p1:"<b>Tudo do Basic</b>, e ainda:", pl_p2:"Painel GPS, valores máximos, variabilidade", pl_p3:"Reab · Control-Chaos + StARRT", pl_p4:"Testes (ForceFrame, Y-Balance, LSI)", pl_p5:"Planos de sessão e mesociclos", pl_p6:"Relatórios premium · WhatsApp/PDF · multi-equipa", pl_p_cta:"Obter Pro",
+  pr_note:"Várias equipas ou um clube inteiro? <a href='#demo'>Fala connosco</a> sobre preço multi-clube.",
+  cta_eyebrow:"Marcar reunião", cta_h2:"Vê com o teu próprio plantel", cta_p:"Conta-nos sobre o teu clube e marcamos uma demo de 30 minutos — e damos-te acesso a um teste. Costumamos responder num dia útil.", cta_small:"Preferes email? ola@teudominio.com",
+  lb_name:"Nome", lb_club:"Clube / organização", lb_email:"Email", lb_role:"Função", lb_msg:"O que queres melhorar?", lb_send:"Pedir a minha demo",
+  ok_h:"✓ Obrigado — pedido recebido", ok_p:"Entramos em contacto num dia útil.", foot_c:"© 2026 Performance Platform · Com base na ciência do desporto · EN / ES / PT"
+ }
+};
+/* capture English defaults from the DOM */
+(function(){const en={};document.querySelectorAll('[data-i18n]').forEach(el=>{en[el.getAttribute('data-i18n')]=el.innerHTML;});I18N.en=en;})();
+function setLang(l){
+  const d=I18N[l]||I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(d[k]!=null)el.innerHTML=d[k];});
+  document.documentElement.lang=l;
+  document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+}
+document.getElementById('lang').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setLang(b.dataset.l);});
+
+/* ===== scroll reveal ===== */
+const io=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== animated counters ===== */
+const cio=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){const el=e.target;const to=+el.dataset.to;let n=0;const step=Math.max(1,Math.round(to/40));const t=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(t);}el.textContent=n;},26);cio.unobserve(el);}});},{threshold:.6});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+/* ===== Netlify form (AJAX + thanks) ===== */
+const form=document.getElementById('demoForm');
+form.addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const body=new URLSearchParams(new FormData(form)).toString();
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body})
+    .catch(()=>{}).finally(()=>{form.style.display='none';document.getElementById('formOk').classList.add('show');});
+});
+</script>
+</body>
+</html>
