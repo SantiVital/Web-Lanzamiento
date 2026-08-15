@@ -570,7 +570,17 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cio=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){const el=e.target,to=+el.dataset.to;let n=0;const step=Math.max(1,Math.round(to/40));const t=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(t);}el.textContent=n;},26);cio.unobserve(el);}});},{threshold:.6});
 document.querySelectorAll('.count').forEach(el=>cio.observe(el));
 const form=document.getElementById('demoForm');
-form.addEventListener('submit',ev=>{ev.preventDefault();const body=new URLSearchParams(new FormData(form)).toString();fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body}).catch(()=>{}).finally(()=>{form.style.display='none';document.getElementById('formOk').classList.add('show');});});
+if(form){form.addEventListener('submit',ev=>{ev.preventDefault();
+  const btn=form.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.style.opacity='.65';}
+  const body=new URLSearchParams(new FormData(form)).toString();
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body})
+   .then(r=>{if(!r.ok)throw new Error('status '+r.status);
+     form.style.display='none';document.getElementById('formOk').classList.add('show');})
+   .catch(()=>{const ok=document.getElementById('formOk');const b=ok.querySelector('b');const d=ok.querySelector('div');
+     if(b)b.textContent='⚠ Could not send right now';
+     if(d)d.innerHTML='Please email us directly at <a href="mailto:hello@smartfootballhub.com" style="color:#fff;text-decoration:underline">hello@smartfootballhub.com</a> and we’ll get right back to you.';
+     form.style.display='none';ok.classList.add('show');});
+});}
 </script>
 </body>
 </html>
