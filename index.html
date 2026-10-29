@@ -5,34 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Smart Football Hub — Performance Data Platform</title>
 <meta name="description" content="The performance data platform for football clubs — squad, GPS, wellness, reports, medical and rehab in one place.">
-<meta name="theme-color" content="#0f8a5f">
-<link rel="canonical" href="https://smartfootballhub.com/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f8a5f'/%3E%3Cg fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 24V9'/%3E%3Cpath d='M9 24H24'/%3E%3Cpath d='M9 13A12 12 0 0 1 21 24'/%3E%3C/g%3E%3Ccircle cx='9' cy='24' r='2.4' fill='%23f15a24'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="video/icon.png">
-<!-- Open Graph / social share -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Smart Football Hub">
-<meta property="og:title" content="Smart Football Hub — Performance Data Platform">
-<meta property="og:description" content="Every number your club runs on, in one place — squad, GPS, wellness, reports, medical and rehab, connected and decision-ready.">
-<meta property="og:url" content="https://smartfootballhub.com/">
-<meta property="og:image" content="https://smartfootballhub.com/video/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Smart Football Hub — every number your club runs on, in one place">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Smart Football Hub — Performance Data Platform">
-<meta name="twitter:description" content="Every number your club runs on, in one place.">
-<meta name="twitter:image" content="https://smartfootballhub.com/video/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#0f8a5f; --green-d:#0b6f4d; --green-l:#1aa06f;
+    --green:#0d7d56; --green-d:#0a6a49; --green-l:#1aa06f;
     --orange:#f15a24; --orange-d:#d84e1c;
-    --ink:#15241d; --muted:#5c6b62; --soft:#8a978f;
+    --ink:#15241d; --muted:#5c6b62; --soft:#6b7a71;
     --bg:#f4f7f4; --card:#ffffff; --line:#e3ebe5; --line2:#eef3ef;
     --radius:18px;
   }
@@ -381,6 +360,59 @@
   @keyframes proGlow{0%,100%{box-shadow:0 0 0 2px rgba(15,138,95,.26),0 0 26px rgba(15,138,95,.08)}50%{box-shadow:0 0 0 2px rgba(15,138,95,.52),0 0 42px rgba(15,138,95,.20)}}
   .hero .stadium-svg,.hero .laptop{will-change:transform}
   @media(prefers-reduced-motion:reduce){#progress{display:none}.plan.pro:after{animation:none}.hero .stadium-svg,.hero .laptop{transform:none!important}}
+
+/* ===== Match analysis (new) ===== */
+#match{background:#fff;border-top:1px solid var(--line);overflow:hidden}
+#match .sec-head{max-width:720px}
+.ma-new{display:inline-flex;align-items:center;gap:6px;background:#fff1ea;color:#b8410f;border:1px solid #f9cdb6;border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-right:8px;vertical-align:middle}
+.ma-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 auto 28px;background:var(--line2);border:1px solid var(--line);border-radius:14px;padding:5px;width:max-content;max-width:100%}
+.ma-tab{appearance:none;border:0;background:transparent;font:inherit;font-weight:700;font-size:14.5px;color:var(--muted);padding:11px 18px;border-radius:10px;cursor:pointer;min-height:44px;transition:.18s}
+.ma-tab:hover{color:var(--ink)}
+.ma-tab[aria-selected="true"]{background:#fff;color:var(--green-d);box-shadow:0 4px 14px rgba(20,40,30,.10)}
+.ma-tab:focus-visible,.ma-sw button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.ma-panel{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center}
+.ma-panel[hidden]{display:none}
+.ma-copy h3{font-size:clamp(22px,2.4vw,30px);font-weight:900;letter-spacing:-.02em;margin:0 0 12px;line-height:1.15}
+.ma-copy p{color:var(--muted);font-size:16px;line-height:1.65;margin:0 0 18px}
+.ma-copy ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.ma-copy ul li{font-size:12.5px;font-weight:600;color:var(--green-d);background:#e9f1ec;border:1px solid var(--line);border-radius:20px;padding:6px 12px}
+.ma-media{position:relative}
+.ma-media .frame img{display:block;width:100%;height:auto}
+.ma-stack{position:relative;padding-bottom:22%}
+.ma-stack .frame:nth-child(2){position:absolute;right:-4%;bottom:0;width:72%;box-shadow:0 30px 70px rgba(15,36,79,.25)}
+.ma-sw{position:absolute;top:52px;right:14px;z-index:2;display:flex;gap:3px;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:3px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.ma-sw button{appearance:none;border:0;background:transparent;font:inherit;font-size:12.5px;font-weight:700;color:var(--muted);padding:7px 11px;border-radius:7px;cursor:pointer;min-height:34px}
+.ma-sw button[aria-pressed="true"]{background:#1c2a80;color:#fff}
+.ma-cap{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+.ma-phones{display:flex;gap:22px;justify-content:center;align-items:flex-start}
+.ma-phones .phone{max-width:250px;background:#0c1533}
+.ma-phones .phone:nth-child(2){margin-top:44px}
+.ma-phones .phone .scr{aspect-ratio:640/1376}
+.ma-flow{list-style:none;counter-reset:maf;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:56px 0 0;padding:0}
+.ma-flow li{counter-increment:maf;position:relative;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px 18px 18px 60px}
+.ma-flow li:before{content:counter(maf);position:absolute;left:16px;top:17px;width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ma-flow b{display:block;font-size:14.5px;margin-bottom:4px;color:var(--ink)}
+.ma-flow span{font-size:13px;color:var(--muted);line-height:1.5}
+.ma-demo-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px}
+@media(max-width:900px){.ma-panel{grid-template-columns:1fr;gap:26px}.ma-flow{grid-template-columns:1fr 1fr}.ma-stack{padding-bottom:30%}}
+@media(max-width:560px){.ma-stack{padding-bottom:0}.ma-stack .frame:nth-child(2){position:relative;right:auto;width:100%;margin-top:14px}.ma-tabs{width:100%;display:grid;grid-template-columns:1fr 1fr}.ma-tab{padding:10px 8px;font-size:13.5px}.ma-flow{grid-template-columns:1fr}.ma-phones{gap:12px}.ma-phones .phone{max-width:46%;padding:7px;border-radius:24px}.ma-phones .phone .scr{border-radius:18px}.ma-sw{top:44px;right:8px}.ma-sw button{font-size:11.5px;padding:6px 8px}}
+
+/* accessible CTA orange (white text ≥ 4.5:1); the bright brand orange stays for accents */
+.btn-primary,.plan .ptag,.ptag,.wk-day.md .wk-tag{background:#cf4410!important}
+.chk{color:#fff}
+.btn-primary:hover{background:#b83c0e!important}
+
+.cta p{color:#eef6f1}
+form label{color:#fff}
+form input:not([type=checkbox]){background:rgba(0,0,0,.18)!important}
+form input::placeholder{color:#d7e7de}
+/* ===== Fixes from the design review ===== */
+.stat b span.count{font-size:inherit;color:inherit;font-weight:inherit}
+@media(max-width:820px){.week{min-width:1180px}.week-wrap{scroll-snap-type:x mandatory}.wk-day{scroll-snap-align:start}.week-hint{display:block}}
+.week-hint{display:none;font-size:12px;color:var(--muted);text-align:right;margin-top:8px}
+@media(max-width:720px){.cta-ball{display:none}}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #3ee08f;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.ma-tab{transition:none}}
 </style>
 </head>
 <body>
@@ -393,7 +425,9 @@
     <nav class="nav-links">
       <a href="#capabilities" data-i18n="nav_cap">Platform</a>
       <a href="#mq1" data-i18n="nav_shot">In action</a>
-      <a href="#pricing" data-i18n="nav_price">Pricing</a>
+      <a href="#match" data-i18n="nav_match">Match analysis</a>
+      <a href="#data" data-i18n="nav_data">Your data</a>
+<a href="#pricing" data-i18n="nav_price">Pricing</a>
     </nav>
     <div class="nav-right">
       <div class="lang" id="lang"><button data-l="en" class="on">EN</button><button data-l="es">ES</button><button data-l="pt">PT</button></div>
@@ -495,8 +529,8 @@
       <div>
         <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></div>
         <h3 data-i18n="c6_h">Report in one tap, not one hour</h3>
-        <p data-i18n="c6_p">Premium individual and match reports — physical output per athlete vs the squad — shareable by WhatsApp or PDF in one tap, plus season statistics.</p>
-        <ul><li data-i18n="c6_t1">Individual reports</li><li data-i18n="c6_t2">Match reports</li><li data-i18n="c6_t3">WhatsApp / PDF</li><li data-i18n="c6_t4">Statistics</li></ul>
+        <p data-i18n="c6_p">Premium individual and match reports — physical output per athlete vs the squad, and a pro match report for every player from your Hudl data — shared by WhatsApp or PDF, or published straight to the player app.</p>
+        <ul><li data-i18n="c6_t1">Individual reports</li><li data-i18n="c6_t2">Match reports</li><li data-i18n="c6_t3">WhatsApp / PDF</li><li data-i18n="c6_t4">Player app</li></ul>
       </div>
       <div class="cap-media" style="display:flex;align-items:center;justify-content:center">
         <div style="width:190px;border-radius:12px;overflow:hidden;border:1px solid var(--line)">
@@ -540,6 +574,91 @@
       </div>
     </div>
 
+    <div class="cap reveal">
+      <div>
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 data-i18n="c7_h">Scout and analyse your next signing</h3>
+        <p data-i18n="c7_p">A full pro-style player report — radar, per-90 percentiles and a vivid heat map — plus player comparison and opposition analysis. Import straight from Hudl (CSV/Excel).</p>
+        <ul><li data-i18n="c7_t1">Scout reports</li><li data-i18n="c7_t2">Heat maps</li><li data-i18n="c7_t3">Player comparison</li><li data-i18n="c7_t4">Opposition analysis</li></ul>
+      </div>
+      <div class="cap-media" style="display:flex;gap:12px;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 120" style="width:104px;height:104px"><polygon points="60,15 99,38 99,82 60,105 21,82 21,38" fill="none" stroke="#d6e3db" stroke-width="1"/><polygon points="60,38 86,50 83,80 60,72 36,80 38,52" fill="none" stroke="#e7eeea" stroke-width="1"/><polygon points="60,22 93,46 84,84 60,74 31,82 27,48" fill="rgba(15,138,95,.2)" stroke="#0f8a5f" stroke-width="2"/></svg>
+        <svg viewBox="0 0 120 90" style="width:100px;border-radius:8px"><defs><radialGradient id="mh1"><stop offset="0%" stop-color="rgba(255,40,30,.95)"/><stop offset="40%" stop-color="rgba(255,205,0,.6)"/><stop offset="100%" stop-color="rgba(40,120,200,0)"/></radialGradient><radialGradient id="mh2"><stop offset="0%" stop-color="rgba(255,120,0,.8)"/><stop offset="100%" stop-color="rgba(40,120,200,0)"/></radialGradient><filter id="mhb"><feGaussianBlur stdDeviation="5"/></filter></defs><rect width="120" height="90" rx="6" fill="#16803c"/><g filter="url(#mhb)"><circle cx="40" cy="58" r="28" fill="url(#mh1)"/><circle cx="82" cy="34" r="22" fill="url(#mh2)"/></g><rect x="2" y="2" width="116" height="86" rx="6" fill="none" stroke="#fff" stroke-opacity=".5"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="blk" id="match" aria-labelledby="ma_h2">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow"><span class="ma-new" data-i18n="ma_new">New</span><span data-i18n="ma_eye">Match analysis</span></span><h2 id="ma_h2" data-i18n="ma_h2">From Hudl tags to a full match report</h2><p data-i18n="ma_sub">Upload your Hudl CSV files. SFH splits the halves, maps every action and builds a report for the team — and one for every player.</p></div>
+    <div class="ma-tabs" role="tablist" aria-label="Match analysis">
+      <button class="ma-tab" role="tab" id="mat1" aria-controls="map1" aria-selected="true" data-i18n="ma_t1">Match overview</button>
+      <button class="ma-tab" role="tab" id="mat2" aria-controls="map2" aria-selected="false" tabindex="-1" data-i18n="ma_t2">Pitch maps</button>
+      <button class="ma-tab" role="tab" id="mat3" aria-controls="map3" aria-selected="false" tabindex="-1" data-i18n="ma_t3">Player report</button>
+      <button class="ma-tab" role="tab" id="mat4" aria-controls="map4" aria-selected="false" tabindex="-1" data-i18n="ma_t4">Player app</button>
+    </div>
+    <div class="ma-panel reveal" role="tabpanel" id="map1" aria-labelledby="mat1">
+      <div class="ma-copy"><h3 data-i18n="ma1_h">The whole match on one page</h3><p data-i18n="ma1_p">Possession, shots and chances, a shots timeline, territory and field tilt, and your team's shape in each half — the debrief is ready before the staff meeting.</p>
+        <ul><li data-i18n="ma1_c1">Shots timeline</li><li data-i18n="ma1_c2">Territory &amp; field tilt</li><li data-i18n="ma1_c3">Pass network by half</li><li data-i18n="ma1_c4">Collective analysis</li></ul></div>
+      <div class="ma-media"><div class="ma-stack"><div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Match analysis · overview</span></div><div class="frame-scr"><img src="video/ma-overview.webp" alt="Match analysis overview: score, possession, shots and shots timeline" loading="lazy" decoding="async" width="1500"></div></div><div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Team shape · 1st vs 2nd half</span></div><div class="frame-scr"><img src="video/ma-shape.webp" alt="Team shape: average positions and passing links in each half" loading="lazy" decoding="async" width="1500"></div></div></div></div>
+    </div>
+    <div class="ma-panel" role="tabpanel" id="map2" aria-labelledby="mat2" hidden>
+      <div class="ma-copy"><h3 data-i18n="ma2_h">Every action, on the pitch</h3><p data-i18n="ma2_p">Heat maps per player and per half, passes, receptions, ball losses, recoveries, shots, crosses, fouls and set pieces. Teams switch ends at half-time — SFH detects it, so both halves compare like for like.</p>
+        <ul><li data-i18n="ma2_c1">Heat maps by half</li><li data-i18n="ma2_c2">Passes &amp; receptions</li><li data-i18n="ma2_c3">Recoveries &amp; ball losses</li><li data-i18n="ma2_c4">Real or normalized ends</li></ul></div>
+      <div class="ma-media">
+        <div class="ma-sw" role="group" aria-label="Direction"><button type="button" aria-pressed="true" data-ma-img="ma-halves.webp" data-i18n="ma_sw1">Normalized →</button><button type="button" aria-pressed="false" data-ma-img="ma-halves-real.webp" data-i18n="ma_sw2">Real ends</button></div>
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Heat map · 1st vs 2nd half</span></div><div class="frame-scr"><img id="maHalves" src="video/ma-halves.webp" alt="Heat map of a centre-back in the 1st and 2nd half" loading="lazy" decoding="async" width="1500"></div></div>
+        <div class="ma-cap" data-i18n="ma2_cap">Try it: switch between normalized (always attacking →) and the real ends of the pitch.</div>
+        <div style="margin-top:18px"><div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Pitch maps · passes</span></div><div class="frame-scr"><img src="video/ma-passes.webp" alt="Pass map of a midfielder: completed passes in teal, lost passes in red" loading="lazy" decoding="async" width="1500"></div></div></div>
+      </div>
+    </div>
+    <div class="ma-panel" role="tabpanel" id="map3" aria-labelledby="mat3" hidden>
+      <div class="ma-copy"><h3 data-i18n="ma3_h">A pro report for every player</h3><p data-i18n="ma3_p">Minutes, actions and passing, percentiles per 90′ against his teammates, an involvement timeline and heat maps by half — in your club's colours, and a PDF in one click.</p>
+        <ul><li data-i18n="ma3_c1">Percentiles per 90′</li><li data-i18n="ma3_c2">Performance radar</li><li data-i18n="ma3_c3">Involvement timeline</li><li data-i18n="ma3_c4">PDF in one click</li></ul></div>
+      <div class="ma-media"><div class="ma-stack"><div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Individual match report</span></div><div class="frame-scr"><img src="video/rep-top.webp" alt="Individual match report: player, key numbers and involvement gauges" loading="lazy" decoding="async" width="1500"></div></div><div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>Performance · percentiles</span></div><div class="frame-scr"><img src="video/rep-polar.webp" alt="Performance radar and per-90 percentile bars" loading="lazy" decoding="async" width="1500"></div></div></div></div>
+    </div>
+    <div class="ma-panel" role="tabpanel" id="map4" aria-labelledby="mat4" hidden>
+      <div class="ma-copy"><h3 data-i18n="ma4_h">Published to the player's phone</h3><p data-i18n="ma4_p">Review the report, add a coach's note and publish. Each player sees only his own report in his app — and when you correct the data, you update it in one tap.</p>
+        <ul><li data-i18n="ma4_c1">Coach's note</li><li data-i18n="ma4_c2">Only his own report</li><li data-i18n="ma4_c3">Update anytime</li><li data-i18n="ma4_c4">PDF download</li></ul></div>
+      <div class="ma-media"><div class="ma-phones"><div class="phone"><div class="scr"><img src="video/app-hub.webp" alt="Player app menu with Match reports" loading="lazy" decoding="async"></div></div><div class="phone"><div class="scr"><img src="video/app-report.webp" alt="Individual match report in the player app" loading="lazy" decoding="async"></div></div></div></div>
+    </div>
+    <ol class="ma-flow reveal">
+      <li><b data-i18n="maf1_h">Import from Hudl</b><span data-i18n="maf1_p">Drop the collective and eventing CSVs — together or one at a time.</span></li>
+      <li><b data-i18n="maf2_h">Halves found automatically</b><span data-i18n="maf2_p">Half-time and attacking directions come from the data — no fixed 45:00.</span></li>
+      <li><b data-i18n="maf3_h">Review the tagging</b><span data-i18n="maf3_p">Gaps are flagged: fix names, merge tags or set the real minutes.</span></li>
+      <li><b data-i18n="maf4_h">Publish to players</b><span data-i18n="maf4_p">One tap sends each player his own report.</span></li>
+    </ol>
+    <div class="ma-demo-note" data-i18n="ma_note">Screens shown with anonymized demo data.</div>
+  </div>
+</section>
+
+<section class="blk" id="data" style="background:#0b1f17;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" style="color:#7fd3a8" data-i18n="dt_eye">Your data, your property</span>
+      <h2 style="color:#fff" data-i18n="dt_h2">Every source in. Nothing locked in.</h2>
+      <p style="color:#b9cfc4" data-i18n="dt_sub">Bring in GPS, scouting and match data however it comes — and keep full ownership. Your data stays with the club, even when staff change.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:6px">
+      <div class="reveal" style="background:#10291f;border:1px solid #1d3d30;border-radius:16px;padding:22px">
+        <div style="color:#7fd3a8;margin-bottom:10px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg></div>
+        <h3 style="color:#fff;font-size:17px;margin:0 0 6px" data-i18n="dt1_h">Bring your data in</h3>
+        <p style="color:#b9cfc4;font-size:14px;line-height:1.6;margin:0" data-i18n="dt1_p">Import any GPS export, and scouting or match data from Hudl — as CSV or Excel. API and manual entry too.</p>
+      </div>
+      <div class="reveal" style="background:#10291f;border:1px solid #1d3d30;border-radius:16px;padding:22px">
+        <div style="color:#7fd3a8;margin-bottom:10px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></div>
+        <h3 style="color:#fff;font-size:17px;margin:0 0 6px" data-i18n="dt2_h">One source of truth</h3>
+        <p style="color:#b9cfc4;font-size:14px;line-height:1.6;margin:0" data-i18n="dt2_p">GPS, medical, wellness, scouting and reports in one place — every department sees the same numbers.</p>
+      </div>
+      <div class="reveal" style="background:#10291f;border:1px solid #1d3d30;border-radius:16px;padding:22px">
+        <div style="color:#7fd3a8;margin-bottom:10px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9.5 12 1.8 1.8L15 10"/></svg></div>
+        <h3 style="color:#fff;font-size:17px;margin:0 0 6px" data-i18n="dt3_h">It&#39;s yours</h3>
+        <p style="color:#b9cfc4;font-size:14px;line-height:1.6;margin:0" data-i18n="dt3_p">Export your data anytime. GDPR-ready and hosted in the EU. The club owns its data — it doesn&#39;t walk out with a departing staff member.</p>
+      </div>
+    </div>
+    <div class="reveal" style="text-align:center;color:#8aa89a;font-size:13px;margin-top:22px" data-i18n="dt_src">Works with exports from Catapult · STATSports · Playermaker · Hudl · GPEXE — and plain CSV / Excel.</div>
   </div>
 </section>
 
@@ -579,6 +698,7 @@
           <li data-i18n="pa_l2"><b>Individual gym &amp; activations</b> — their session with video, sets and reps</li>
           <li data-i18n="pa_l3"><b>Nutrition</b> — meal plans, body composition and skinfolds</li>
           <li data-i18n="pa_l4"><b>Notices</b> — messages and reminders from the staff</li>
+          <li data-i18n="pa_l5"><b>Match reports</b> — their individual report, as soon as the staff publishes it</li>
         </ul>
       </div>
       <div class="pa-shot reveal"><div class="phone"><div class="scr"><video class="av" autoplay muted loop playsinline preload="metadata" poster="video/player.jpg"><source src="video/player.mp4" type="video/mp4"></video></div></div></div>
@@ -602,15 +722,16 @@
   <svg class="pitch" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#0f8a5f" stroke-opacity=".07" stroke-width="2" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"><rect x="20" y="20" width="1160" height="360"/><line x1="600" y1="20" x2="600" y2="380"/><circle cx="600" cy="200" r="70"/><rect x="20" y="120" width="90" height="160"/><rect x="1090" y="120" width="90" height="160"/><circle cx="600" cy="200" r="4" fill="#0f8a5f" fill-opacity=".1" stroke="none"/></svg>
   <div class="wrap" style="position:relative;z-index:1">
     <div class="sec-head reveal"><span class="eyebrow" data-i18n="wk_eye">A week with SFH</span><h2 data-i18n="wk_h2">From the final whistle to the next kickoff</h2><p data-i18n="wk_sub">Every day of the microcycle has its decision — and the data is already there for it.</p></div>
-    <div class="week-wrap reveal">
+    <div class="week-wrap reveal" tabindex="0" role="region" aria-label="Matchday week">
       <div class="week">
-        <div class="wk-day md"><span class="wk-tag">MD+1</span><h4 data-i18n="wk1_h">Match report ready</h4><p data-i18n="wk1_p">Physical output and the full match report land automatically — share them before the staff meeting.</p></div>
+        <div class="wk-day md"><span class="wk-tag">MD+1</span><h4 data-i18n="wk1_h">Match report ready</h4><p data-i18n="wk1_p">Physical output, the Hudl match analysis and every player's report are ready — share them before the staff meeting.</p></div>
         <div class="wk-day"><span class="wk-tag">MD+2</span><h4 data-i18n="wk2_h">Recovery &amp; wellness</h4><p data-i18n="wk2_p">Morning wellness check-ins flag who bounced back and who needs managing.</p></div>
         <div class="wk-day"><span class="wk-tag">MD-4</span><h4 data-i18n="wk3_h">Plan the load</h4><p data-i18n="wk3_p">Build the week's sessions around real load targets, not gut feel.</p></div>
         <div class="wk-day"><span class="wk-tag">MD-3 / -2</span><h4 data-i18n="wk4_h">Availability &amp; injuries</h4><p data-i18n="wk4_p">See who's fit, who's in rehab and who's at risk — adjust before it costs you.</p></div>
         <div class="wk-day md"><span class="wk-tag">MD-1</span><h4 data-i18n="wk5_h">Squad status &amp; decisions</h4><p data-i18n="wk5_p">Readiness, availability and load in one view — pick the team with confidence.</p></div>
       </div>
     </div>
+    <div class="week-hint" aria-hidden="true" data-i18n="wk_hint">Swipe to see the whole week →</div>
   </div>
 </section>
 
@@ -672,13 +793,13 @@
 
 <section class="blk" id="pricing" style="background:#eef3ef;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow" data-i18n="pr_eyebrow">Pricing</span><h2 data-i18n="pr_h2">Priced per team</h2><p data-i18n="pr_sub">Every price below is <b>per team, per month</b>. Add as many teams as you need — the per-team price drops as you grow.</p></div>
+    <div class="sec-head reveal"><span class="eyebrow" data-i18n="pr_eyebrow">Pricing</span><h2 data-i18n="pr_h2">Priced per team</h2><p data-i18n="pr_sub">We keep pricing simple and fair, per team. We share the exact numbers in a quick demo — tailored to your club and how many teams you run.</p></div>
     <div class="price-grid">
       <div class="plan reveal">
         <h3>Team</h3>
         <div class="desc" data-i18n="pl_b_d">The staff platform for one team — squad, medical &amp; team data.</div>
-        <div class="amt">€89<small> <span data-i18n="pl_per">/ team / month</span></small></div>
-        <div class="per" data-i18n="pl_b_bill">Billed annually · or €109 monthly</div>
+        <div class="amt" style="font-size:23px"><span data-i18n="pl_demo">Pricing in your demo</span></div>
+        <div class="per" data-i18n="pl_b_bill">Tailored to your club · annual or monthly</div>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b1">My Team, line-ups & squad board</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_b2">Injury Control, treatment &amp; rehab planning</span></li>
@@ -692,8 +813,8 @@
         <span class="ptag" data-i18n="pl_pop">Most popular</span>
         <h3>Pro</h3>
         <div class="desc" data-i18n="pl_p_d">The player app, individual analytics &amp; reports — for clubs that live on data.</div>
-        <div class="amt">€249<small> <span data-i18n="pl_per">/ team / month</span></small></div>
-        <div class="per" data-i18n="pl_p_bill">Billed annually · or €299 monthly · volume discounts below</div>
+        <div class="amt" style="font-size:23px"><span data-i18n="pl_demo">Pricing in your demo</span></div>
+        <div class="per" data-i18n="pl_p_bill">Tailored to your club · volume discounts as you grow</div>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p1"><b>Everything in Team</b>, plus:</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p2">The player app — wellness, activations &amp; nutrition</span></li>
@@ -701,6 +822,7 @@
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p4">Individual reports — GPS, weekly &amp; rehab</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p5">Individual gym programs sent to players</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p6">Premium reporting · WhatsApp/PDF · multi-team</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg><span data-i18n="pl_p7">Hudl match analysis &amp; individual match reports in the player app</span></li>
         </ul>
         <a href="#demo" class="btn btn-green" style="justify-content:center" data-i18n="pl_p_cta">Get Pro</a>
       </div>
@@ -724,7 +846,7 @@
       <span class="eyebrow" data-i18n="tailor_eye">Tailored to your club</span>
       <p data-i18n="tailor_p" style="font-size:15.5px;color:var(--ink);line-height:1.62;margin:9px 0 0;font-weight:500">Every club works differently. We adapt the platform to your team's metrics, workflow and departments — so it fits how you already operate, not the other way around.</p>
     </div>
-    <div class="price-note reveal" data-i18n="pr_note">Prices are per team, per month. Running a whole club or several academies? <a href="#demo">Talk to us</a> about Club pricing.</div>
+    <div class="price-note reveal" data-i18n="pr_note">Running a whole club or several academies? <a href="#demo">Talk to us</a> — we tailor Club pricing to your setup.</div>
   </div>
 </section>
 
@@ -738,14 +860,14 @@
           <span class="eyebrow" data-i18n="cta_eyebrow">Book a meeting</span>
           <h2 data-i18n="cta_h2">See it with your own squad</h2>
           <p data-i18n="cta_p">Tell us about your club and we'll set up a 30-minute demo — and get you into a trial. We usually reply within one business day.</p>
-          <div style="margin-top:16px;font-size:13px;color:#a9c4b8" data-i18n="cta_small">Prefer email? hello@smartfootballhub.com</div>
+          <div style="margin-top:16px;font-size:13px;color:#fff;opacity:1" data-i18n="cta_small">Prefer email? hello@smartfootballhub.com</div>
         </div>
         <div>
           <form name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="demoForm">
             <input type="hidden" name="form-name" value="demo">
             <p hidden><label>Don't fill: <input name="bot-field"></label></p>
-            <div class="row2"><div class="f"><label data-i18n="lb_name">Name</label><input name="name" required></div><div class="f"><label data-i18n="lb_club">Club / organisation</label><input name="club" required></div></div>
-            <div class="row2"><div class="f"><label data-i18n="lb_email">Email</label><input type="email" name="email" required></div><div class="f"><label data-i18n="lb_role">Role</label><input name="role" placeholder="Head of Performance"></div></div>
+            <div class="row2"><div class="f"><label for="f_name" data-i18n="lb_name">Name</label><input id="f_name" name="name" autocomplete="name" required></div><div class="f"><label for="f_club" data-i18n="lb_club">Club / organisation</label><input id="f_club" name="club" autocomplete="organization" required></div></div>
+            <div class="row2"><div class="f"><label for="f_email" data-i18n="lb_email">Email</label><input id="f_email" type="email" name="email" autocomplete="email" required></div><div class="f"><label for="f_role" data-i18n="lb_role">Role</label><input id="f_role" name="role" autocomplete="organization-title" placeholder="Head of Performance"></div></div>
             <div class="f"><label data-i18n="lb_goals">What do you want to improve? (pick any)</label>
               <div class="checks">
                 <label class="chk"><input type="checkbox" name="goals" value="availability"><span data-i18n="g_avail">Know who's available</span></label>
@@ -754,6 +876,8 @@
                 <label class="chk"><input type="checkbox" name="goals" value="injuries"><span data-i18n="g_inj">Control injuries &amp; rehab</span></label>
                 <label class="chk"><input type="checkbox" name="goals" value="reports"><span data-i18n="g_rep">Report faster</span></label>
                 <label class="chk"><input type="checkbox" name="goals" value="align"><span data-i18n="g_align">Align all my staff</span></label>
+                <label class="chk"><input type="checkbox" name="goals" value="matches"><span data-i18n="g_match">Analyse our matches</span></label>
+                <label class="chk"><input type="checkbox" name="goals" value="players"><span data-i18n="g_pl">Give players their reports</span></label>
               </div>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" data-i18n="lb_send">Request my demo</button>
@@ -767,11 +891,8 @@
 
 <footer>
   <div class="wrap foot-in">
-    <a class="brand" href="#top"><svg class="sfh" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 25V7"/><path d="M7 25H25"/><path d="M7 11A14 14 0 0 1 21 25"/><path d="M11 25v-3M15 25v-3M19 25v-3"/><circle cx="7" cy="25" r="2.6" fill="#f15a24" stroke="none"/></svg><span class="wm">SMARTFOOTBALL<b>HUB</b></span></a>
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-      <a href="privacy.html" data-i18n="foot_priv" style="color:var(--muted);font-weight:600;text-decoration:none">Privacy Policy</a>
-      <div data-i18n="foot_c">© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT</div>
-    </div>
+    <a class="brand" href="#top" aria-label="Smart Football Hub — back to top"><svg class="sfh" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 25V7"/><path d="M7 25H25"/><path d="M7 11A14 14 0 0 1 21 25"/><path d="M11 25v-3M15 25v-3M19 25v-3"/><circle cx="7" cy="25" r="2.6" fill="#f15a24" stroke="none"/></svg><span class="wm">SMARTFOOTBALL<b>HUB</b></span></a>
+    <div data-i18n="foot_c">© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT</div>
   </div>
 </footer>
 
@@ -810,22 +931,87 @@ const I18N={ en:{},
   s1_h:"Sube tu plantilla", s1_p:"Añade equipos y jugadores, o impórtalos. Define roles y accesos del staff en minutos.",
   s2_h:"Registra cada día", s2_p:"Wellness, disponibilidad, GPS, tratamientos y rehab entran desde el staff y los móviles de los jugadores.",
   s3_h:"Decide con datos", s3_p:"Readiness, carga, riesgo de lesión y return-to-play — visual y listo para la siguiente sesión.",
-  pr_eyebrow:"Precios", pr_h2:"Precio por equipo", pr_sub:"Todos los precios son <b>por equipo y por mes</b>. Añade los equipos que necesites — el precio por equipo baja según creces.",
+  pr_eyebrow:"Precios", pr_h2:"Precio por equipo",
   pl_per:"/ equipo / mes", pl_pop:"Más popular",
-  pl_b_d:"La plataforma del staff para un equipo — plantilla, médico y datos de equipo.", pl_b_bill:"Facturación anual · o €109 al mes",
+  pl_b_d:"La plataforma del staff para un equipo — plantilla, médico y datos de equipo.",
   pl_b1:"Mi Equipo, alineaciones y squad board", pl_b2:"Control de lesiones, tratamiento y rehab", pl_b3:"Panel GPS de equipo, tests y sesiones", pl_b4:"Registro de partidos e informes de equipo", pl_b5:"Hasta 8 usuarios del staff · EN/ES/PT", pl_b_cta:"Empezar con Team",
-  pl_p_d:"La app del jugador, analítica individual e informes — para clubes que viven de los datos.", pl_p_bill:"Facturación anual · o €299 al mes · descuentos por volumen abajo",
+  pl_p_d:"La app del jugador, analítica individual e informes — para clubes que viven de los datos.",
   pl_p1:"<b>Todo lo de Team</b>, y además:", pl_p2:"La app del jugador — wellness, activaciones y nutrición", pl_p3:"Readiness de equipo y variabilidad de wellness", pl_p4:"Informes individuales — GPS, semanal y rehab", pl_p5:"Programas de gimnasio individuales para jugadores", pl_p6:"Informes premium · WhatsApp/PDF · multi-equipo", pl_p_cta:"Contratar Pro",
   pl_c_d:"Para un club o academia entera con varios equipos en una sola cuenta.", pl_c_amt:"A medida", pl_c_per:"· precio por volumen", pl_c_bill:"El mejor precio por equipo · desde 5 equipos",
   pl_c1:"<b>Todo lo de Pro</b>, para cada equipo", pl_c2:"Administración multi-equipo central · una sola factura", pl_c3:"Descuento por volumen que crece con los equipos", pl_c4:"Tu propio subdominio · club.smartfootballhub.com", pl_c5:"Onboarding prioritario y soporte dedicado", pl_c6:"Roles a medida, SSO y exportación de datos", pl_c_cta:"Habla con nosotros",
   vol_h:"Precio por volumen — cuantos más equipos, menor el precio por equipo", vol_sub:"Precios de ejemplo en el plan Pro, facturación anual. Team escala igual. El precio final del club se confirma en tu llamada de demo.",
   vb_pl:"/ equipo / mes", vb1_t:"1 equipo", vb2_t:"2–4 equipos", vb2_s:"ahorra 12%", vb3_t:"5–9 equipos", vb3_s:"ahorra 24%", vb4_t:"10+ equipos", vb4_p:"A medida", vb4_pl:"mejor precio", vb4_s:"habla con nosotros",
   tailor_eye:"Adaptada a tu club", tailor_p:"Cada club trabaja de forma distinta. Adaptamos la plataforma a las métricas, el flujo de trabajo y los departamentos de tu equipo — para que encaje en cómo ya trabajas, y no al revés.",
-  pr_note:"Los precios son por equipo y por mes. ¿Un club entero o varias academias? <a href='#demo'>Habla con nosotros</a> sobre el plan Club.",
   cta_eyebrow:"Reservar reunión", cta_h2:"Míralo con tu propia plantilla", cta_p:"Cuéntanos sobre tu club y montamos una demo de 30 minutos — y te damos acceso a una prueba. Solemos responder en un día laborable.", cta_small:"¿Prefieres email? hola@smartfootballhub.com",
   lb_name:"Nombre", lb_club:"Club / organización", lb_email:"Email", lb_role:"Rol", lb_msg:"¿Qué quieres mejorar?", lb_send:"Solicitar mi demo",
-  ok_h:"✓ Gracias — solicitud recibida", ok_p:"Te contactamos en un día laborable.", foot_c:"© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT", foot_priv:"Política de privacidad",
+  ok_h:"✓ Gracias — solicitud recibida", ok_p:"Te contactamos en un día laborable.", foot_c:"© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT",
    pa_eye:"En el bolsillo del jugador", pa_h2:"La app del jugador", pa_p:"Cada jugador tiene su propio espacio. Abre un enlace, lo añade a la pantalla de inicio y funciona como una app real — solo con sus datos. Sin crear cuentas, sin contraseñas que recordar.", pa_l1:"<b>Wellness diario</b> — un check-in de 30 segundos cada mañana", pa_l2:"<b>Gimnasio y activaciones individuales</b> — su sesión con vídeo, series y repeticiones", pa_l3:"<b>Nutrición</b> — planes de comidas, composición corporal y pliegues", pa_l4:"<b>Avisos</b> — mensajes y recordatorios del staff",
+   nav_data:"Tus datos",
+   pl_demo:"Precio en tu demo",
+   pr_sub:"Mantenemos el precio simple y justo, por equipo. Te damos los números exactos en una demo rápida — adaptados a tu club y al número de equipos que lleves.",
+   pl_b_bill:"Adaptado a tu club · anual o mensual", pl_p_bill:"Adaptado a tu club · descuentos por volumen al crecer",
+   pr_note:"¿Un club entero o varias academias? <a href='#demo'>Habla con nosotros</a> — adaptamos el precio del plan Club a tu caso.",
+   dt_eye:"Tus datos, tu propiedad", dt_h2:"Entra cualquier fuente. Nada queda atrapado.", dt_sub:"Mete GPS, scouting y datos de partido como vengan — y mantén la propiedad total. Tus datos se quedan en el club, aunque cambie el staff.",
+   dt1_h:"Sube tus datos", dt1_p:"Importa cualquier export de GPS, y datos de scouting o partido desde Hudl — en CSV o Excel. También API y entrada manual.",
+   dt2_h:"Una sola fuente de verdad", dt2_p:"GPS, médico, wellness, scouting e informes en un solo sitio — todos los departamentos ven los mismos números.",
+   dt3_h:"Son tuyos", dt3_p:"Exporta tus datos cuando quieras. Lista para RGPD y alojada en la UE. El club es dueño de sus datos — no se van con quien se marcha.",
+   dt_src:"Funciona con exports de Catapult · STATSports · Playermaker · Hudl · GPEXE — y CSV / Excel normal.",
+   c7_h:"Haz scouting y analiza tu próximo fichaje", c7_p:"Un informe de jugador estilo BeSoccer — radar, percentiles por 90 y un mapa de calor vistoso — más comparador de jugadores y análisis del rival. Importa directo desde Hudl (CSV/Excel).",
+   c7_t1:"Informes de scouting", c7_t2:"Mapas de calor", c7_t3:"Comparador", c7_t4:"Análisis del rival",
+   nav_match:"Análisis de partido",
+   ma_new:"Nuevo",
+   ma_eye:"Análisis de partido",
+   ma_h2:"De los tags de Hudl a un informe de partido completo",
+   ma_sub:"Sube los CSV de Hudl. SFH separa las partes, sitúa cada acción en el campo y crea un informe del equipo — y otro de cada jugador.",
+   ma_t1:"Resumen del partido",
+   ma_t2:"Mapas del campo",
+   ma_t3:"Informe del jugador",
+   ma_t4:"App del jugador",
+   ma1_h:"Todo el partido en una página",
+   ma1_p:"Posesión, tiros y ocasiones, línea de tiros, territorio y field tilt, y la estructura del equipo en cada parte — el análisis listo antes de la reunión del staff.",
+   ma1_c1:"Línea de tiros",
+   ma1_c2:"Territorio y field tilt",
+   ma1_c3:"Red de pases por parte",
+   ma1_c4:"Análisis colectivo",
+   ma2_h:"Cada acción, en el campo",
+   ma2_p:"Mapas de calor por jugador y por parte, pases, recepciones, pérdidas, recuperaciones, tiros, centros, faltas y balón parado. Los equipos cambian de campo en el descanso — SFH lo detecta, así las dos partes se comparan de verdad.",
+   ma2_c1:"Mapas de calor por parte",
+   ma2_c2:"Pases y recepciones",
+   ma2_c3:"Recuperaciones y pérdidas",
+   ma2_c4:"Campo real o normalizado",
+   ma_sw1:"Normalizado →",
+   ma_sw2:"Campo real",
+   ma2_cap:"Pruébalo: cambia entre normalizado (atacando siempre →) y el campo real.",
+   ma3_h:"Un informe profesional para cada jugador",
+   ma3_p:"Minutos, acciones y pase, percentiles por 90′ frente a sus compañeros, línea de participación y mapas de calor por parte — con los colores de tu club y en PDF con un clic.",
+   ma3_c1:"Percentiles por 90′",
+   ma3_c2:"Radar de rendimiento",
+   ma3_c3:"Línea de participación",
+   ma3_c4:"PDF en un clic",
+   ma4_h:"Publicado en el móvil del jugador",
+   ma4_p:"Revisa el informe, añade una nota del entrenador y publícalo. Cada jugador ve solo su propio informe en su app — y si corriges los datos, lo actualizas con un toque.",
+   ma4_c1:"Nota del entrenador",
+   ma4_c2:"Solo su informe",
+   ma4_c3:"Actualizable",
+   ma4_c4:"Descarga en PDF",
+   maf1_h:"Importa desde Hudl",
+   maf1_p:"Sube el CSV colectivo y el de eventing — juntos o por separado.",
+   maf2_h:"Partes detectadas solas",
+   maf2_p:"El descanso y la dirección de ataque salen de los datos — nada de un 45:00 fijo.",
+   maf3_h:"Revisa el etiquetado",
+   maf3_p:"Se marcan los huecos: corrige nombres, une tags o pon los minutos reales.",
+   maf4_h:"Publica a los jugadores",
+   maf4_p:"Con un toque cada jugador recibe su propio informe.",
+   ma_note:"Pantallas con datos de demostración anonimizados.",
+   c6_p:"Informes individuales y de partido premium — output físico por atleta frente al equipo y un informe profesional de cada jugador a partir de tus datos de Hudl — por WhatsApp o PDF, o publicados directamente en la app del jugador.",
+   c6_t4:"App del jugador",
+   c7_p:"Un informe de jugador profesional — radar, percentiles por 90 y un mapa de calor vistoso — más comparador de jugadores y análisis del rival. Importa directo desde Hudl (CSV/Excel).",
+   pa_l5:"<b>Informes de partido</b> — su informe individual, en cuanto el staff lo publica",
+   pl_p7:"Análisis de partido de Hudl e informes individuales en la app del jugador",
+   wk1_p:"El output físico, el análisis de partido de Hudl y el informe de cada jugador ya están listos — compártelos antes de la reunión del staff.",
+   wk_hint:"Desliza para ver toda la semana →",
+   g_match:"Analizar nuestros partidos",
+   g_pl:"Dar a los jugadores sus informes",
  },
  pt:{
   tagline:"Plataforma de dados de desempenho", nav_cap:"Plataforma", nav_shot:"Em ação", nav_price:"Preços", nav_cta:"Marcar demo",
@@ -860,22 +1046,87 @@ const I18N={ en:{},
   s1_h:"Traz o teu plantel", s1_p:"Adiciona equipas e jogadores, ou importa-os. Define papéis e acessos do staff em minutos.",
   s2_h:"Regista todos os dias", s2_p:"Wellness, disponibilidade, GPS, tratamentos e reab entram do staff e dos telemóveis dos jogadores.",
   s3_h:"Decide com dados", s3_p:"Readiness, carga, risco de lesão e return-to-play — visual e pronto para a próxima sessão.",
-  pr_eyebrow:"Preços", pr_h2:"Preço por equipa", pr_sub:"Todos os preços são <b>por equipa e por mês</b>. Adiciona as equipas que precisares — o preço por equipa desce à medida que cresces.",
+  pr_eyebrow:"Preços", pr_h2:"Preço por equipa",
   pl_per:"/ equipa / mês", pl_pop:"Mais popular",
-  pl_b_d:"A plataforma do staff para uma equipa — plantel, médico e dados de equipa.", pl_b_bill:"Faturação anual · ou €109 por mês",
+  pl_b_d:"A plataforma do staff para uma equipa — plantel, médico e dados de equipa.",
   pl_b1:"Minha Equipa, onzes e squad board", pl_b2:"Controlo de lesões, tratamento e reab", pl_b3:"Painel GPS de equipa, testes e sessões", pl_b4:"Registo de jogos e relatórios de equipa", pl_b5:"Até 8 utilizadores do staff · EN/ES/PT", pl_b_cta:"Começar com Team",
-  pl_p_d:"A app do jogador, analítica individual e relatórios — para clubes que vivem de dados.", pl_p_bill:"Faturação anual · ou €299 por mês · descontos por volume abaixo",
+  pl_p_d:"A app do jogador, analítica individual e relatórios — para clubes que vivem de dados.",
   pl_p1:"<b>Tudo do Team</b>, e ainda:", pl_p2:"A app do jogador — wellness, ativações e nutrição", pl_p3:"Readiness da equipa e variabilidade de wellness", pl_p4:"Relatórios individuais — GPS, semanal e reab", pl_p5:"Programas de ginásio individuais para jogadores", pl_p6:"Relatórios premium · WhatsApp/PDF · multi-equipa", pl_p_cta:"Obter Pro",
   pl_c_d:"Para um clube ou academia inteira com várias equipas numa só conta.", pl_c_amt:"Personalizado", pl_c_per:"· preço por volume", pl_c_bill:"O melhor preço por equipa · a partir de 5 equipas",
   pl_c1:"<b>Tudo do Pro</b>, para cada equipa", pl_c2:"Administração multi-equipa central · uma só fatura", pl_c3:"Desconto por volume que cresce com as equipas", pl_c4:"O teu próprio subdomínio · club.smartfootballhub.com", pl_c5:"Onboarding prioritário e suporte dedicado", pl_c6:"Papéis à medida, SSO e exportação de dados", pl_c_cta:"Fala connosco",
   vol_h:"Preço por volume — quantas mais equipas, menor o preço por equipa", vol_sub:"Preços de exemplo no plano Pro, faturação anual. O Team escala da mesma forma. O preço final do clube é confirmado na tua chamada de demo.",
   vb_pl:"/ equipa / mês", vb1_t:"1 equipa", vb2_t:"2–4 equipas", vb2_s:"poupa 12%", vb3_t:"5–9 equipas", vb3_s:"poupa 24%", vb4_t:"10+ equipas", vb4_p:"Personalizado", vb4_pl:"melhor preço", vb4_s:"fala connosco",
   tailor_eye:"Adaptada ao teu clube", tailor_p:"Cada clube trabalha de forma diferente. Adaptamos a plataforma às métricas, ao fluxo de trabalho e aos departamentos da tua equipa — para encaixar na forma como já trabalhas, e não ao contrário.",
-  pr_note:"Os preços são por equipa e por mês. Um clube inteiro ou várias academias? <a href='#demo'>Fala connosco</a> sobre o plano Club.",
   cta_eyebrow:"Marcar reunião", cta_h2:"Vê com o teu próprio plantel", cta_p:"Conta-nos sobre o teu clube e marcamos uma demo de 30 minutos — e damos-te acesso a um teste. Costumamos responder num dia útil.", cta_small:"Preferes email? ola@smartfootballhub.com",
   lb_name:"Nome", lb_club:"Clube / organização", lb_email:"Email", lb_role:"Função", lb_msg:"O que queres melhorar?", lb_send:"Pedir a minha demo",
-  ok_h:"✓ Obrigado — pedido recebido", ok_p:"Entramos em contacto num dia útil.", foot_c:"© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT", foot_priv:"Política de privacidade",
+  ok_h:"✓ Obrigado — pedido recebido", ok_p:"Entramos em contacto num dia útil.", foot_c:"© 2026 Smart Football Hub · Performance Data Platform · EN / ES / PT",
    pa_eye:"No bolso do jogador", pa_h2:"A app do jogador", pa_p:"Cada jogador tem o seu próprio espaço. Abre um link, adiciona-o ao ecrã inicial e funciona como uma app real — apenas com os seus dados. Sem criar contas, sem palavras-passe para memorizar.", pa_l1:"<b>Wellness diário</b> — um check-in de 30 segundos todas as manhãs", pa_l2:"<b>Ginásio e ativações individuais</b> — a sua sessão com vídeo, séries e repetições", pa_l3:"<b>Nutrição</b> — planos de refeições, composição corporal e pregas", pa_l4:"<b>Avisos</b> — mensagens e lembretes do staff",
+   nav_data:"Os teus dados",
+   pl_demo:"Preço na tua demo",
+   pr_sub:"Mantemos o preço simples e justo, por equipa. Damos-te os números exatos numa demo rápida — adaptados ao teu clube e ao número de equipas que tens.",
+   pl_b_bill:"Adaptado ao teu clube · anual ou mensal", pl_p_bill:"Adaptado ao teu clube · descontos por volume ao crescer",
+   pr_note:"Um clube inteiro ou várias academias? <a href='#demo'>Fala connosco</a> — adaptamos o preço do plano Club ao teu caso.",
+   dt_eye:"Os teus dados, tua propriedade", dt_h2:"Entra qualquer fonte. Nada fica preso.", dt_sub:"Mete GPS, scouting e dados de jogo como vierem — e mantém a propriedade total. Os teus dados ficam no clube, mesmo quando muda o staff.",
+   dt1_h:"Importa os teus dados", dt1_p:"Importa qualquer export de GPS, e dados de scouting ou jogo do Hudl — em CSV ou Excel. Também API e entrada manual.",
+   dt2_h:"Uma só fonte de verdade", dt2_p:"GPS, médico, wellness, scouting e relatórios num só lugar — todos os departamentos veem os mesmos números.",
+   dt3_h:"São teus", dt3_p:"Exporta os teus dados quando quiseres. Pronta para RGPD e alojada na UE. O clube é dono dos seus dados — não saem com quem se vai embora.",
+   dt_src:"Funciona com exports de Catapult · STATSports · Playermaker · Hudl · GPEXE — e CSV / Excel normal.",
+   c7_h:"Faz scouting e analisa o teu próximo reforço", c7_p:"Um relatório de jogador ao estilo BeSoccer — radar, percentis por 90 e um mapa de calor vistoso — mais comparador de jogadores e análise do adversário. Importa direto do Hudl (CSV/Excel).",
+   c7_t1:"Relatórios de scouting", c7_t2:"Mapas de calor", c7_t3:"Comparador", c7_t4:"Análise do adversário",
+   nav_match:"Análise de jogo",
+   ma_new:"Novo",
+   ma_eye:"Análise de jogo",
+   ma_h2:"Das tags do Hudl a um relatório de jogo completo",
+   ma_sub:"Carrega os CSV do Hudl. O SFH separa as partes, coloca cada ação no campo e cria um relatório da equipa — e outro de cada jogador.",
+   ma_t1:"Resumo do jogo",
+   ma_t2:"Mapas do campo",
+   ma_t3:"Relatório do jogador",
+   ma_t4:"App do jogador",
+   ma1_h:"O jogo inteiro numa página",
+   ma1_p:"Posse, remates e ocasiões, linha de remates, território e field tilt, e a estrutura da equipa em cada parte — a análise pronta antes da reunião do staff.",
+   ma1_c1:"Linha de remates",
+   ma1_c2:"Território e field tilt",
+   ma1_c3:"Rede de passes por parte",
+   ma1_c4:"Análise coletiva",
+   ma2_h:"Cada ação, no campo",
+   ma2_p:"Mapas de calor por jogador e por parte, passes, receções, perdas, recuperações, remates, cruzamentos, faltas e bolas paradas. As equipas trocam de campo ao intervalo — o SFH deteta-o, para comparar as duas partes de verdade.",
+   ma2_c1:"Mapas de calor por parte",
+   ma2_c2:"Passes e receções",
+   ma2_c3:"Recuperações e perdas",
+   ma2_c4:"Campo real ou normalizado",
+   ma_sw1:"Normalizado →",
+   ma_sw2:"Campo real",
+   ma2_cap:"Experimenta: alterna entre normalizado (sempre a atacar →) e o campo real.",
+   ma3_h:"Um relatório profissional para cada jogador",
+   ma3_p:"Minutos, ações e passe, percentis por 90′ face aos colegas, linha de participação e mapas de calor por parte — com as cores do teu clube e em PDF num clique.",
+   ma3_c1:"Percentis por 90′",
+   ma3_c2:"Radar de rendimento",
+   ma3_c3:"Linha de participação",
+   ma3_c4:"PDF num clique",
+   ma4_h:"Publicado no telemóvel do jogador",
+   ma4_p:"Revê o relatório, junta uma nota do treinador e publica. Cada jogador vê apenas o seu relatório na app — e se corrigires os dados, atualizas num toque.",
+   ma4_c1:"Nota do treinador",
+   ma4_c2:"Só o seu relatório",
+   ma4_c3:"Atualizável",
+   ma4_c4:"Download em PDF",
+   maf1_h:"Importa do Hudl",
+   maf1_p:"Carrega o CSV coletivo e o de eventing — juntos ou separados.",
+   maf2_h:"Partes detetadas sozinhas",
+   maf2_p:"O intervalo e a direção de ataque saem dos dados — nada de um 45:00 fixo.",
+   maf3_h:"Revê a etiquetagem",
+   maf3_p:"As falhas são assinaladas: corrige nomes, junta tags ou define os minutos reais.",
+   maf4_h:"Publica aos jogadores",
+   maf4_p:"Num toque cada jogador recebe o seu relatório.",
+   ma_note:"Ecrãs com dados de demonstração anonimizados.",
+   c6_p:"Relatórios individuais e de jogo premium — output físico por atleta face à equipa e um relatório profissional de cada jogador a partir dos teus dados do Hudl — por WhatsApp ou PDF, ou publicados diretamente na app do jogador.",
+   c6_t4:"App do jogador",
+   c7_p:"Um relatório de jogador profissional — radar, percentis por 90 e um mapa de calor vistoso — mais comparador de jogadores e análise do adversário. Importa direto do Hudl (CSV/Excel).",
+   pa_l5:"<b>Relatórios de jogo</b> — o seu relatório individual, assim que o staff o publica",
+   pl_p7:"Análise de jogo do Hudl e relatórios individuais na app do jogador",
+   wk1_p:"O output físico, a análise de jogo do Hudl e o relatório de cada jogador estão prontos — partilha-os antes da reunião do staff.",
+   wk_hint:"Desliza para ver a semana toda →",
+   g_match:"Analisar os nossos jogos",
+   g_pl:"Dar aos jogadores os seus relatórios",
  }
 };
 (function(){const en={};document.querySelectorAll('[data-i18n]').forEach(el=>{en[el.getAttribute('data-i18n')]=el.innerHTML;});I18N.en=en;})();
@@ -911,7 +1162,8 @@ if(form){form.addEventListener('submit',ev=>{ev.preventDefault();
      c4:['GPS · Peak Values',null,'Peak values'],
      c1:['My Team · live line-up','lineup',null],
      c5:['Wellness & Readiness','wellness',null],
-     c6:['Individual athlete report','report',null],
+     c6:['Individual match report','img:rep-top.webp',null],
+     c7:['Player report · percentiles','img:rep-polar.webp',null],
      c2:['Injury Control','injury',null],
      c3:['Rehab · Control-Chaos','rehab',null]
    };
@@ -921,7 +1173,9 @@ if(form){form.addEventListener('submit',ev=>{ev.preventDefault();
      var m=MAP[key];if(!m)return;
      var media=cap.querySelector('.cap-media');if(!media)return;
      var inner;
-     if(m[1]){
+     if(m[1]&&m[1].indexOf('img:')===0){
+       inner='<div class="frame-scr"><img alt="'+m[0]+'" src="video/'+m[1].slice(4)+'" loading="lazy" decoding="async"></div>';
+     } else if(m[1]){
        inner='<div class="frame-scr"><video class="av" autoplay muted loop playsinline preload="metadata" poster="video/'+m[1]+'.jpg"><source src="video/'+m[1]+'.mp4" type="video/mp4"></video></div>';
      } else {
        var src=_shotSrc(m[2]);if(!src)return;
@@ -1000,6 +1254,18 @@ if(form){form.addEventListener('submit',ev=>{ev.preventDefault();
   window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});
   window.addEventListener('resize',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});
   upd();
+})();
+</script>
+
+<script>
+(function(){
+ var tabs=[].slice.call(document.querySelectorAll('#match .ma-tab'));if(!tabs.length)return;
+ function sel(t,focus){tabs.forEach(function(b){var on=b===t;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;var p=document.getElementById(b.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on)p.classList.add('in');}});if(focus)t.focus();}
+ tabs.forEach(function(b,i){b.addEventListener('click',function(){sel(b);});b.addEventListener('keydown',function(e){var k=e.key,n=null;if(k==='ArrowRight')n=tabs[(i+1)%tabs.length];else if(k==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];else if(k==='Home')n=tabs[0];else if(k==='End')n=tabs[tabs.length-1];if(n){e.preventDefault();sel(n,true);}});});
+ /* warm the other tabs' screens once the section is near, so switching tabs never shows an empty frame */
+ var sec=document.getElementById('match');if(sec&&'IntersectionObserver' in window){var wo=new IntersectionObserver(function(en){if(en[0].isIntersecting){sec.querySelectorAll('img[loading=lazy]').forEach(function(im){im.loading='eager';});['ma-halves-real.webp'].forEach(function(f){var i=new Image();i.src='video/'+f;});wo.disconnect();}},{rootMargin:'400px'});wo.observe(sec);}
+ var sw=[].slice.call(document.querySelectorAll('#match .ma-sw button')),img=document.getElementById('maHalves');
+ sw.forEach(function(b){b.addEventListener('click',function(){sw.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});if(img){img.src='video/'+b.getAttribute('data-ma-img');img.alt=b.getAttribute('data-ma-img').indexOf('real')>=0?'Heat map with the real ends of the pitch: the team attacks right in the 1st half and left in the 2nd':'Heat map of a centre-back in the 1st and 2nd half, both oriented attacking right';}});});
 })();
 </script>
 </body>
